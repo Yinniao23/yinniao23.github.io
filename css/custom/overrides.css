@@ -1,0 +1,543 @@
+/* ================================================================
+   Yinniao 博客自定义样式 overrides
+   放置于 assets/css/custom/ 目录，由主题自动加载
+   ================================================================ */
+
+/* ---- 保留原有头像边框去除规则 ---- */
+.shrink-0 img {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* ================================================================
+   1. 全局背景 — Light 模式：蓝(#629CCE)左上 → 红(#AB3E41)右上 → 白下
+      Dark 模式：保持原主题微妙渐变
+   ================================================================ */
+body {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 0%, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent),
+    radial-gradient(ellipse 60% 50% at 80% 100%, color-mix(in srgb, var(--color-secondary) 10%, transparent), transparent);
+  background-attachment: fixed;
+}
+
+/* Light 模式覆盖：大范围深色渐变 */
+:root:not(.dark) body {
+  background-image:
+    radial-gradient(ellipse 140% 120% at 0% 0%,
+      rgba(98, 156, 206, 0.70) 0%,
+      rgba(98, 156, 206, 0.30) 45%,
+      transparent 72%),
+    radial-gradient(ellipse 140% 110% at 100% 0%,
+      rgba(164, 0, 0, 0.60) 0%,
+      rgba(164, 48, 52, 0.441) 30%,
+      transparent 72%),
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(208, 208, 208, 0.5) 40%,
+      #cbcbc8aa 82%);
+  background-attachment: fixed;
+}
+
+/* ================================================================
+   2. 文章卡片 — 弧角矩形透明毛玻璃框（核心需求）
+   ================================================================ */
+article.group > a > div {
+  background: color-mix(in srgb, var(--color-card) 50%, transparent) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* 卡片悬停 — 上浮 + 边框发光 + 阴影增强 */
+article.group > a > div:hover {
+  background: color-mix(in srgb, var(--color-card) 65%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px color-mix(in srgb, var(--color-primary) 12%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* ================================================================
+   2b. 友链卡片 — 与文章卡片一致的毛玻璃，悬停保持透明度
+   ================================================================ */
+.friend-card {
+  background: color-mix(in srgb, var(--color-card) 50%, transparent) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.friend-card:hover {
+  background: color-mix(in srgb, var(--color-card) 65%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 0 0 1px color-mix(in srgb, var(--color-primary) 12%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* 暗色模式微调 */
+.dark .friend-card {
+  background: color-mix(in srgb, var(--color-card) 55%, transparent) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dark .friend-card:hover {
+  background: color-mix(in srgb, var(--color-card) 70%, transparent) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px color-mix(in srgb, var(--color-primary) 15%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ================================================================
+   3. 首页作者卡片 — 毛玻璃效果
+   ================================================================ */
+.author-section > div {
+  background: color-mix(in srgb, var(--color-card) 45%, transparent) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--color-border) 45%, transparent) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ================================================================
+   4. 页头导航 — 增强毛玻璃
+   ================================================================ */
+header > div {
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  background: color-mix(in srgb, var(--color-card) 70%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--color-border) 40%, transparent) !important;
+}
+
+/* ================================================================
+   5. 首页公告卡片（page-content）— 毛玻璃
+   ================================================================ */
+.author-section ~ div > div[class*="bg-primary/10"],
+.post-list ~ div > div[class*="bg-primary/10"] {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ================================================================
+   6. 自定义滚动条
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-muted-foreground) 30%, transparent);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  background-clip: content-box;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-muted-foreground) 30%, transparent) transparent;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+/* ================================================================
+   7. 渐入动画（fade-in on scroll）
+   ================================================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+article.group,
+.author-section,
+.post-list > div > * {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+/* 列表项依次渐入 */
+.post-list article.group:nth-child(1) { animation-delay: 0.05s; }
+.post-list article.group:nth-child(2) { animation-delay: 0.10s; }
+.post-list article.group:nth-child(3) { animation-delay: 0.15s; }
+.post-list article.group:nth-child(4) { animation-delay: 0.20s; }
+.post-list article.group:nth-child(5) { animation-delay: 0.25s; }
+.post-list article.group:nth-child(6) { animation-delay: 0.30s; }
+
+/* 尊重用户减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  article.group,
+  .author-section,
+  .post-list > div > * {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ================================================================
+   8. 文章标题悬停色彩过渡平滑
+   ================================================================ */
+article.group h3 {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* ================================================================
+   9. 暗色模式微调 — 毛玻璃在暗色下加深
+   ================================================================ */
+.dark article.group > a > div {
+  background: color-mix(in srgb, var(--color-card) 55%, transparent) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.dark article.group > a > div:hover {
+  background: color-mix(in srgb, var(--color-card) 70%, transparent) !important;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px color-mix(in srgb, var(--color-primary) 15%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.dark .author-section > div {
+  background: color-mix(in srgb, var(--color-card) 50%, transparent) !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ================================================================
+   10. 选中文字配色
+   ================================================================ */
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  color: var(--color-foreground);
+}
+
+/* ================================================================
+    11. 链接下划线动画
+    ================================================================ */
+.prose a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+/* ================================================================
+    12. 页面切换过渡 — 仅用 opacity，不用 transform
+    （transform 会为 position:fixed 子元素创建新包含块，
+     破坏 dock / TOC / 搜索弹窗的视口定位）
+    ================================================================ */
+@keyframes pageEnter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#page-container {
+  animation: pageEnter 0.4s ease-out both;
+}
+
+/* ================================================================
+    13. 滚动揭示 — 视口下方元素渐入
+    ================================================================ */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================================================
+    14. 卡片烟雾流光悬停效果
+    — 鼠标移入时一团古朴色烟雾从右上飘到左下，扩散消散
+    — 色调：红 黄 青 蓝（古朴偏暗），大面积模糊，自然过渡
+    ================================================================ */
+@keyframes smokeSweep {
+  0% {
+    transform: translate(55%, -55%) scale(0.4);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-55%, 55%) scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* 文章卡片 + 友链卡片 */
+article.group > a > div::after,
+.friend-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    225deg,
+    transparent 5%,
+    rgba(170, 65, 45, 0.32) 22%,
+    rgba(195, 165, 55, 0.32) 42%,
+    rgba(65, 140, 150, 0.32) 62%,
+    rgba(55, 90, 140, 0.32) 82%,
+    transparent 95%
+  );
+  filter: blur(28px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(55%, -55%) scale(0.4);
+}
+
+article.group > a > div:hover::after,
+.friend-card:hover::after {
+  animation: smokeSweep 1.0s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+}
+
+/* 尊重减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  #page-container {
+    animation: none;
+  }
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  article.group > a > div:hover::after,
+  .friend-card:hover::after {
+    animation: none;
+  }
+}
+
+/* ================================================================
+    15. 搜索框 — 段落定位 + "and more"
+    ================================================================ */
+.search-result-item {
+  cursor: pointer;
+}
+
+.search-result-title {
+  text-decoration: none;
+  color: var(--color-foreground);
+  transition: color 0.2s ease;
+}
+
+.search-result-item:hover .search-result-title,
+.search-result-title:hover {
+  color: var(--color-primary);
+}
+
+.search-result-snippet {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.search-result-snippet:hover {
+  color: var(--color-primary);
+}
+
+.search-result-more-wrap {
+  justify-content: flex-start;
+}
+
+.search-result-more {
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  line-height: 1.2;
+}
+
+.search-result-more:hover {
+  text-decoration: underline;
+}
+
+.search-result-more-list {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  padding-left: 0.75rem;
+}
+
+.search-result-more-list.hidden {
+  display: none;
+}
+
+.search-result-more-list .search-result-snippet + .search-result-snippet {
+  margin-top: 0.35rem;
+}
+
+/* ================================================================
+    16. Categories 页 — 分组列表（日期 + 标题行）
+    ================================================================ */
+.category-article-row {
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.category-article-row:hover {
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.category-article-row:hover span,
+.category-article-row:hover time {
+  color: var(--color-primary);
+}
+
+.category-group {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ================================================================
+    17. 页脚访客统计（Busuanzi）
+    ================================================================ */
+.visitor-stats-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.visitor-stats-item svg {
+  opacity: 0.7;
+}
+
+.visitor-stats-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.visitor-stats-sep {
+  opacity: 0.5;
+}
+
+/* Busuanzi 默认会隐藏容器，这里强制显示以便始终可见 */
+#busuanzi_container_site_uv,
+#busuanzi_container_site_pv {
+  display: inline !important;
+}
+
+/* ================================================================
+    18. 文章表格 — 紧凑化 + 横向滚动条
+    （原 prose 表格 padding 大、字号与正文相同，宽表撑破版面）
+    ================================================================ */
+
+/* 表格变为块级滚动容器；
+   内部 thead/tbody/tr/td 保持默认 table 布局（同一列宽算法，不错位），
+   宽表在容器内横向滚动。
+   width: fit-content 让边框只包住实际内容——小表格不会被拉满整行留白，
+   宽表格仍受 max-width 限制并出滚动条 */
+.prose table {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* 单元格紧凑化：padding 减半、字号缩小一档 */
+.prose th,
+.prose td {
+  padding-inline: calc(var(--spacing) * 2);
+  padding-block: calc(var(--spacing) * 1.5);
+  font-size: 0.875em;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+/* 表头不换行，正文单元格长内容允许在单元格内换行 */
+.prose th {
+  white-space: nowrap;
+}
+.prose td {
+  white-space: normal;
+}
+
+/* 滚动条样式与全站一致 */
+.prose table::-webkit-scrollbar {
+  height: 8px;
+}
+.prose table::-webkit-scrollbar-track {
+  background: transparent;
+}
+.prose table::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-muted-foreground) 30%, transparent);
+  border-radius: 9999px;
+}
+.prose table::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+}
+
+/* ================================================================
+    20. 页面级关闭图片悬停放大
+    （front matter 设 disableImageHoverZoom = true 时，
+     body 会带上 no-image-hover-zoom 类，图片悬停不再放大；
+     点击放大的灯箱功能保留）
+    ================================================================ */
+.no-image-hover-zoom .single-image img:hover,
+.no-image-hover-zoom .lightbox-trigger img:hover {
+  scale: none;
+}
+
+/* ================================================================
+    19. 上一篇/下一篇导航 — 两行标题与一行标题等高
+    （原卡片 min-h-[140px] + 弹性布局，标题换行时高度被拉高）
+    ================================================================ */
+.post-navigation .nav-item > a {
+  min-height: 140px;
+}
+
+/* 标题区域固定两行高度（line-clamp-2 预留），无论标题一行还是两行 */
+.post-navigation .nav-item > a h3 {
+  min-height: 2.6em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* prev/next 两张卡片同高（grid 拉伸） */
+.post-navigation > div {
+  align-items: stretch;
+}
+.post-navigation .nav-item {
+  display: flex;
+}
+.post-navigation .nav-item > a,
+.post-navigation .nav-item > div {
+  width: 100%;
+}
